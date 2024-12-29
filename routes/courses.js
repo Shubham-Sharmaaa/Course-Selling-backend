@@ -33,10 +33,7 @@ courserouter.delete("/delete",authadmin,async (req,res)=>{
 })
 courserouter.post("/purchase",auth,async (req,res)=>{
     try{const {CourseName}=req.body;
-    console.log(req.decodedtoken)
-    console.log(req.decodedtoken.id)
     const user = await UserModel.findOne({_id:req.decodedtoken.id});
-    console.log(`user: ${user}`)
     await PurchasesModel.create({userId:user._id,CourseName:CourseName,})
     res.status(200).json({"msg":"course bought successfully"})}
     catch(e){
